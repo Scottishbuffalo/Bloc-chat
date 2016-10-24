@@ -1,9 +1,31 @@
 (function() {
-    function RoomCtrl(Room, $scope) {
-        $scope.rooms = Room.all;
+    function RoomCtrl(Room, $uibModal) {
+        this.chatRooms = Room.all;
+        
+        this.openModal = function() {
+            var modalWindow = $uibModal.open({
+                templateUrl: '/templates/modal.html',
+                controller: function ($scope, $uibModalInstance) {
+                    $scope.roomName = {name: ''};
+                    $scope.cancelAction = function() {
+                        $uibModalInstance.dismiss('cancel');
+                    };
+                    
+                    $scope.createRoom = function() {
+                        $uibModalInstance.close($scope.newRoom)
+                    };
+                },
+                size: 'sm'
+            });
+            
+            modalWindow.result.then(function(data){
+                Room.addRoom(data);
+            });
+        }
+        
     }
-
+    
     angular
         .module('blocChat')
-        .controller('RoomCtrl', ['Room','$scope', RoomCtrl]);
+        .controller('RoomCtrl', ['Room', '$uibModal', RoomCtrl])
 })();

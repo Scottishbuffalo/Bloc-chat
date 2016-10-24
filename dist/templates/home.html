@@ -1,11 +1,25 @@
+<section class="container">
 <h1>Bloc Chat</h1>
 
     
-<div>
+<div class="col-md-4 sidebar clearfix">
     <div class="rooms">
         <p class="title">Rooms</p>
+        <div class="rooms-btn">
+             <button type="button" name="AddRoom" class="btn btn-success center-block" id="addRoom" ng-click="room.openModal()">Add Room</button>
+          </div>
     </div>
-    <div ng-repeat="room in rooms">
-    	{{room.name}}
+    
+</div>
+
+<div class="list-rooms">
+        <div class="chatrooms">
+            <a class=room-selector>Room1</a>
+            <a class=room-selector>Room2</a>
+            <a class=room-selector>Room3</a>
+        </div>
     </div>
 </div>
+
+<div class="col-md-8 main-view clearfix"></div>
+</section>
