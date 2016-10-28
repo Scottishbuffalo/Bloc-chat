@@ -17,12 +17,18 @@
                 url:'/',
                 controller: 'ModalCtrl as modal',
                 templateUrl: '/templates/modal.html'
+            })
+
+             .state('login', {
+                 url: '/login',
+                 controller: 'LoginCtrl as login',
+                 templateUrl: '/templates/login.html'
             });
     }
 
 
 
     angular
-        .module('blocChat', ['ui.router', 'ui.bootstrap', 'firebase'])
+        .module('blocChat', ['ui.router', 'ui.bootstrap', 'firebase', 'ngCookies'])
         .config(config);
 })();

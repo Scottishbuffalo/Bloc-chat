@@ -17,4 +17,4 @@
 
 <button ng-click="createMessage()" type="submit" class="btn btn-success"> New Message </button>
 
-<p ng-repeat="message in currentMessages">{{ message.content }}</p>
+<p ng-repeat="message in currentMessages">{{ message.userName }}: {{ message.content }}}</p>

@@ -1,5 +1,5 @@
 (function() {
-    function RoomCtrl(Room, Message, $scope, $uibModal) {
+    function RoomCtrl(Room, Message, $scope, $uibModal, $cookies) {
         $scope.rooms = Room.all;
         $scope.currentRoom = null;
         $scope.currentMessages = [];
@@ -21,7 +21,6 @@
             console.log("createMessage")
             message = $scope.newMessage;
             message.roomId = $scope.currentRoom.$id;
-            message.userName = "Mike";
             Message.sendMessage(message);
         }
         
@@ -44,5 +43,5 @@
 
     angular
         .module('blocChat')
-        .controller('RoomCtrl', ['Room','Message', '$scope', '$uibModal', RoomCtrl]);
+        .controller('RoomCtrl', ['Room','Message', '$scope', '$uibModal','$cookies', RoomCtrl]);
 })();
