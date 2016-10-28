@@ -1,31 +1,48 @@
 (function() {
-    function RoomCtrl(Room, $uibModal) {
-        this.chatRooms = Room.all;
-        
-        this.openModal = function() {
-            var modalWindow = $uibModal.open({
+    function RoomCtrl(Room, Message, $scope, $uibModal) {
+        $scope.rooms = Room.all;
+        $scope.currentRoom = null;
+        $scope.currentMessages = [];
+        $scope.newMessage = {};
+        $scope.createRoom = function () {
+            console.log("open");
+            $uibModal.open({
                 templateUrl: '/templates/modal.html',
-                controller: function ($scope, $uibModalInstance) {
-                    $scope.roomName = {name: ''};
-                    $scope.cancelAction = function() {
-                        $uibModalInstance.dismiss('cancel');
-                    };
-                    
-                    $scope.createRoom = function() {
-                        $uibModalInstance.close($scope.newRoom)
-                    };
-                },
-                size: 'sm'
+                controller: 'ModalCtrl',
+                resolve: { 
+                    rooms: function() {
+                        return $scope.rooms;
+                    }
+                }
             });
-            
-            modalWindow.result.then(function(data){
-                Room.addRoom(data);
-            });
+        };
+        
+        $scope.createMessage = function(){
+            console.log("createMessage")
+            message = $scope.newMessage;
+            message.roomId = $scope.currentRoom.$id;
+            message.userName = "Mike";
+            Message.sendMessage(message);
         }
         
-    }
-    
+         $scope.setMessages = function(messages){
+            console.log("set messages");
+            $scope.currentMessages = messages;
+        };
+        
+        $scope.getMessagesByRoom = function(room){
+            Message.getByRoomId(room.$id, $scope.setMessages);
+        };
+        
+        $scope.setCurrentRoom = function(room) {
+            $scope.currentRoom = room;
+            console.log(room.name)
+            $scope.getMessagesByRoom(room);
+        };
+        
+    };
+
     angular
         .module('blocChat')
-        .controller('RoomCtrl', ['Room', '$uibModal', RoomCtrl])
+        .controller('RoomCtrl', ['Room','Message', '$scope', '$uibModal', RoomCtrl]);
 })();

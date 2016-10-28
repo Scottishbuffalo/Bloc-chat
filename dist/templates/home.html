@@ -1,25 +1,20 @@
-<section class="container">
-<h1>Bloc Chat</h1>
+<h1>BlocChat</h1>
 
-    
-<div class="col-md-4 sidebar clearfix">
-    <div class="rooms">
-        <p class="title">Rooms</p>
-        <div class="rooms-btn">
-             <button type="button" name="AddRoom" class="btn btn-success center-block" id="addRoom" ng-click="room.openModal()">Add Room</button>
-          </div>
-    </div>
-    
+<div>
+    <button ng-click="createRoom()" type="submit" class="btn btn-success"> New Room </button>
 </div>
 
-<div class="list-rooms">
-        <div class="chatrooms">
-            <a class=room-selector>Room1</a>
-            <a class=room-selector>Room2</a>
-            <a class=room-selector>Room3</a>
+<div ng-click="setCurrentRoom(room)" ng-repeat="room in rooms">{{ room.name }}</div>
+
+<h2>{{ currentRoom.name }}</h2>
+
+<div class="message-body">
+        <div class="form-group">
+            <label for="createMessage()">Create Message</label>
+            <input type="text" class="form-control" placeholder="Write your message" ng-model="newMessage.content">
         </div>
-    </div>
-</div>
+        
 
-<div class="col-md-8 main-view clearfix"></div>
-</section>
+<button ng-click="createMessage()" type="submit" class="btn btn-success"> New Message </button>
+
+<p ng-repeat="message in currentMessages">{{ message.content }}</p>
