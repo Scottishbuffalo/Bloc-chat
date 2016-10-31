@@ -1,20 +1,26 @@
-<h1>BlocChat</h1>
+<div id="bground">
+	<div id="content">
+		<div id="chat-room-options">
+			<h1>Chat Rooms</h1>
 
-<div>
-    <button ng-click="createRoom()" type="submit" class="btn btn-success"> New Room </button>
-</div>
-
-<div ng-click="setCurrentRoom(room)" ng-repeat="room in rooms">{{ room.name }}</div>
-
-<h2>{{ currentRoom.name }}</h2>
-
-<div class="message-body">
-        <div class="form-group">
-            <label for="createMessage()">Create Message</label>
-            <input type="text" class="form-control" placeholder="Write your message" ng-model="newMessage.content">
-        </div>
-        
+			<div id="croom-list">
+				<div ng-click="setCurrentRoom(room)" ng-repeat="room in rooms">{{ room.name }}</div>	
+			</div>
+				<h3>Your in: {{currentRoom.name }}</h3>
+    			<button ng-click="createRoom()" type="submit" class="btn btn-success"> New Room </button>
+		</div>
+		<div id="message-options">
+			<h2>Messages</h2>
+			<div id="messages-sent"><p ng-repeat="message in currentMessages">{{ message.userName }}: {{ message.content }}</p>
+				<div class="message-body">
+             		<div class="form-group">
+             			<label for="createMessage()">Create Message</label>
+             			 <input type="text" class="form-control" placeholder="Write your message" ng-model="newMessage.content">
+             		</div>
 
 <button ng-click="createMessage()" type="submit" class="btn btn-success"> New Message </button>
-
-<p ng-repeat="message in currentMessages">{{ message.userName }}: {{ message.content }}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

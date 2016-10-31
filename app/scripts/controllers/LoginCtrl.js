@@ -3,7 +3,7 @@
          
          $scope.createUserName = function(userName){
              if(userName && userName !== ''){
-                 $cookies.currentUser = userName;
+                 $cookies.put('blocChatCurrentUser', userName);
                  $uibModalInstance.close();
                  console.log("inside create user name");
              }

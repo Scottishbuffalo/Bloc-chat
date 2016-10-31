@@ -26,9 +26,23 @@
             });
     }
 
+    function BlocChatCookies($cookies, $uibModal) {
+        var currentUser = $cookies.get('blocChatCurrentUser');
+        if (!currentUser || currentUser === '') {
+            console.log("open");
+            $uibModal.open({
+                templateUrl: '/templates/login.html',
+                controller: 'LoginCtrl',
+                size: 'sm',
+                backdrop: 'static',
+                keyboard: false
+            });
+        }
+    }
 
 
     angular
         .module('blocChat', ['ui.router', 'ui.bootstrap', 'firebase', 'ngCookies'])
-        .config(config);
+        .config(config)
+        .run(['$cookies', '$uibModal', BlocChatCookies]);
 })();
